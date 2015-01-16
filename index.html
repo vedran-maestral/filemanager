@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-framework="backbonejs">
+<head>
+    <meta charset="utf-8">
+    <title>File Manager v.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/messenger.css">
+    <link rel="stylesheet" href="css/wyswyg/jquery.wyswygi.css">
+    <style>
+        table {
+            table-layout: fixed;
+            width: 100%
+        }
+
+        th.rmventry {
+            width: 6% !important
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <h1>Files</h1>
+</header>
+
+<div class="container theme-showcase">
+    <div id="filemanageapp" class="jumbotron">
+        <section id="main">
+            <div class="table-responsive">
+                <table id="file-list" class="table table-striped table-bordered">
+                </table>
+            </div>
+        </section>
+        <input id="filter-extension" placeholder="Automatic Search by File Name">
+        <button id="performfilter" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Filter
+        </button>
+        <br><br>
+        <button id="viewBookmarks" class="btn btn-lg btn-primary" title="HTML or Text file">Bookmarks</button>
+        <button id="uploadNewFile" class="btn btn-lg btn-primary" title="HTML or Text file">Upload</button>
+        <button id="addNewFile" class="btn btn-lg btn-primary" title="HTML or Text file">Create New</button>
+    </div>
+</div>
+
+<!-- Templates -->
+<script type="text/template" id="item-template">
+    <td>
+        <span style="cursor: pointer" title="Delete this file" class="destroy glyphicon glyphicon-remove"></span>
+    </td>
+    <td class="tablerow"><%= filename %>
+    </td>
+    <td class="tablerow"><%= filetype %></td>
+    <td class="tablerow"><%= filesize %></td>
+    <td><%= fileoptions %></td>
+    <td><% if (bookmark) { %>
+        <span class="glyphicon glyphicon-bookmark"></span>
+        <% } %>
+    </td>
+</script>
+<br>
+
+<!--//Dependency List-->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/jquery/dist/jqueryui.js"></script>
+<script src="lib/jquery/plugins/jquery.wysiwyg.js"></script>
+<script src="lib/underscore/underscore.js"></script>
+<script src="lib/backbone/backbone.js"></script>
+<script src="lib/backbone.localStorage/backbone.localStorage.js"></script>
+<script src="lib/messenger/messenger.js"></script>
+
+<script src="js/views/file_view.js"></script>
+
+<div id="add-new-file-dialogue" title="Please enter new file details" style="display: none; overflow: hidden">
+    <input id="file-name" placeholder="Enter File Name" autofocus>
+    <select id="file-type">
+        <option value="html">HTML</option>
+        <option value="txt">Text</option>
+    </select>
+    <br>
+    <textarea style="resize: none; width: 800px!important" cols="26" rows="15" id="file-content"
+              placeholder="Enter Content"></textarea>
+</div>
+
+<div id="preview-file-dialogue" style="display: none; overflow: hidden">
+    <div id="filePreviewContent"></div>
+</div>
+
+<div id="upload-image-dialogue" title="Please select the image source" style="display: none; overflow: hidden">
+    Upload From PC:
+    <form action='#' onsubmit="return false;">
+        <input type='file' id='imgfile'/>
+        <input type='button' id='btnLoadImage' value='Load'/>
+    </form>
+    Facebook Profile:
+    <button id='facebook-image' accept="image/*" name="image" style="margin-top: 10px">Grab Profile Image</button>
+    <br>
+    Current Image:
+    <div id="camera-message" title="Please Select Your Resume Image">
+        <div id="cameraControls" class="center" style="display: none; overflow: hidden">
+            <video class="shadow" id="video" width="320" height="240" autoplay></video>
+            <div class='row'>
+                <div id="cvchecker" class='large-12 columns'></div>
+                <br>
+            </div>
+            <div class='row'>
+                <div class='validation-messages large-12 columns'></div>
+            </div>
+            <div id="loaderIcon"></div>
+        </div>
+    </div>
+    <canvas id="canvas" width="320" height="240"></canvas>
+    <canvas id="camcanvas" width="320" height="240"></canvas>
+</div>
+</body>
+</html>
