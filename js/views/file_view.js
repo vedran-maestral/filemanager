@@ -378,12 +378,10 @@ var app = app || {};
                 wWidth = $(window).width(),
                 wHeight = $(window).height();
 
-
             //Clear Context of the Canvas
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.restore();
-
 
             setTimeout(function () {
                 $("#cameraControls").show();
@@ -468,11 +466,11 @@ var app = app || {};
         newFile: function () {
             $("#add-new-file-dialogue").dialog({
                 show: {
-                    effect: "drop",
+                    effect: "scale",
                     duration: 300
                 },
                 hide: {
-                    effect: "drop",
+                    effect: "scale",
                     duration: 300
                 },
                 width: screen.width / 2,
