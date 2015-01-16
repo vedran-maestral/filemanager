@@ -386,27 +386,22 @@ var app = app || {};
             setTimeout(function () {
                 $("#cameraControls").show();
 
-                //$('.ui-dialog-buttonset').find('button:first').addClass('myRedButton closeCameraDialogue');
-
                 // Put video listeners into place
                 if (navigator.getUserMedia) { // Standard
                     navigator.getUserMedia(videoObj, function (stream) {
                         video.src = stream;
                         video.play();
-                        //that.cameraMessageClearance(stream);
                     }, errBack);
                 } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
                     navigator.webkitGetUserMedia(videoObj, function (stream) {
                         video.src = window.webkitURL.createObjectURL(stream);
                         video.play();
-                        //that.cameraMessageClearance(stream);
                     }, errBack);
                 }
                 else if (navigator.mozGetUserMedia) { // Firefox-prefixed
                     navigator.mozGetUserMedia(videoObj, function (stream) {
                         video.src = window.URL.createObjectURL(stream);
                         video.play();
-                        // that.cameraMessageClearance(stream);
                     }, errBack);
                 }
             }, 1000);
@@ -417,6 +412,7 @@ var app = app || {};
             $("#btnLoadImage").on("click", this.imageUploader);
 
             //Not working unless served via http
+            //---Uncomment this line to activate camera!!!!
             // this.cameraImageUpload();
             $("#upload-image-dialogue").dialog({
                 show: {
