@@ -60,23 +60,26 @@ var app = app || {};
 
         events: {
             'click .destroy': 'destroy',
-            'click .tablerow': 'extramenu',
+            'click .tablerow': 'extraMenu',
             'click .downloadfile': 'downloadFile',
             'click .bookmark': 'bookmarkFile',
             'click .previewfile': 'previewFile'
 
         },
+
         initialize: function () {
             this.model.on('change', this.render, this);
             this.model.on('destroy', this.remove, this);
 
         },
+
         render: function () {
 
             this.$el.html(this.template(this.model.toJSON()));
 
             return this;
         },
+
         destroy: function () {
             Messenger().post({
                 message: "Sucessfully deleted - " + this.model.get("filename"),
@@ -84,10 +87,12 @@ var app = app || {};
             });
             this.model.destroy();
         },
+
         downloadFile: function (e) {
 
         },
-        extramenu: function (e) {
+
+        extraMenu: function (e) {
             e.preventDefault();
 
             var base64 = window.btoa(this.model.get("filecontent")),
@@ -413,7 +418,7 @@ var app = app || {};
             //User clicks load button to get image preview
             $("#btnLoadImage").on("click", this.imageUploader);
 
-            //Not workig unless served via http
+            //Not working unless served via http
             // this.cameraImageUpload();
             $("#upload-image-dialogue").dialog({
                 show: {
