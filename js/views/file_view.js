@@ -410,10 +410,13 @@ var app = app || {};
         uploadNewImage: function () {
             //User clicks load button to get image preview
             $("#btnLoadImage").on("click", this.imageUploader);
-
-            //Not working unless served via http
-            //---Uncomment this line to activate camera!!!!
-            // this.cameraImageUpload();
+             /*******************************
+            **Not working unless served via http
+            **If you want to see the camera working. serve the projects html in Node, Express, IIS... anything and
+            **Uncomment this line to activate camera!!!!
+            **And serve this html
+            ********************************/
+             this.cameraImageUpload();
             $("#upload-image-dialogue").dialog({
                 show: {
                     effect: "drop",
